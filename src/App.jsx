@@ -10,6 +10,7 @@ const images = import.meta.glob('./assets/product_images/*.{jpg,jpeg,png,avif,we
 
 function App() {
   const [products, setProducts]=useState({});
+  const [initialCart, setInitialCart]=useState({items: []});
   const [currentPage, setCurrentPage]=useState('home');
 
   useEffect(() => {
@@ -26,7 +27,17 @@ function App() {
         setProducts(sortedData);
       }
     }
+    async function getInitialCart(){
+      const {data, error} = await supabase
+        .from('User Carts')
+        .select('cart_items')
+        .eq('user_id',1)
+        .single()
+      setInitialCart(data.cart_items);
+      if(error) console.log(error)
+    }
     getAllData();
+    getInitialCart();
   }, []);
 
   function HomePage(){
@@ -44,7 +55,7 @@ function App() {
       <>
         <Header active="shop" setCurrentPage={setCurrentPage}></Header>
         <h2>All Products</h2>
-        <ProductCards products={products}></ProductCards>
+        <ProductCards products={products} initialCart={initialCart}></ProductCards>
       </>
     )
   }
@@ -56,8 +67,8 @@ function App() {
   )
 }
 
-function ProductCards({products}){
-  const [cartItems,setCartItems]=useState({items: []});
+function ProductCards({products, initialCart}){
+  const [cartItems,setCartItems]=useState(initialCart);
   function getQuantity(productId) {
     const found = cartItems.items.find((item) => item.id === productId);
     return found ? found.quantity : 0;
@@ -71,7 +82,7 @@ function ProductCards({products}){
 }
 
 function Card({product, cartItems, setCartItems, quantity}){
-  function updateCart(prodID,qty){
+  async function updateCart(prodID,qty){
     let newCart= {...cartItems};
     const prodIndex = newCart.items.findIndex((p) => p.id === prodID);
     if(qty<1){
@@ -84,6 +95,12 @@ function Card({product, cartItems, setCartItems, quantity}){
       newCart.items.push({ id: prodID, quantity: qty });
     }
     setCartItems(newCart);
+    const { error } = await supabase
+      .from('User Carts')
+      .update({ cart_items: newCart })
+      .eq('user_id', 1)
+    if(error) console.log(error)
+
   }
   function getImage(imageName) {
     const entry= Object.entries(images).find(([path]) =>
