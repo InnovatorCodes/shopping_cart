@@ -1,12 +1,12 @@
 import cartSVG from '../assets/cart.svg';
 
-export default function Header({active}){
+export default function Header({active,setCurrentPage}){
   return (
     <div className='header'>
       <h1>LUNO</h1>
       <div className="links">
-        <div className={`link home ${active=='home'?'active':''}`}>Home</div>
-        <div className={`link shop ${active=='shop'?'active':''}`}>Shop</div>
+        <div className={`link home ${active=='home'?'active':''}`} onClick={()=>{active!='home'? setCurrentPage('home'): null}}>Home</div>
+        <div className={`link shop ${active=='shop'?'active':''}`} onClick={()=>{active!='shop'? setCurrentPage('shop'): null}}>Shop</div>
       </div>
       <div className="buttons">
         <button className="cart"><img src={cartSVG} alt="cart" /></button>
