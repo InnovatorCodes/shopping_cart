@@ -2,6 +2,8 @@ import './App.css'
 import Header from './components/Header'
 import Slider from './components/Slider';
 import Categories from './components/Categories';
+import Login from './components/Login';
+import ProductCards from './components/ProductCards';
 import { useEffect, useState } from 'react';
 
 import { supabase } from './components/supabaseClient';
@@ -12,15 +14,17 @@ function App() {
   const [products, setProducts]=useState({});
   const [initialCart, setInitialCart]=useState({items: []});
   const [currentPage, setCurrentPage]=useState('home');
+  const [loggedIn,setLoggedIn]=useState(false)
+  const [user,setUser]=useState(null);
 
   useEffect(() => {
     async function getAllData() {
-      const { data, error } = await supabase
+      const { data, alert } = await supabase
         .from('Luno Database')
         .select('*'); // This line pauses until the Supabase query finishes
   
-      if (error) {
-        console.log(error);
+      if (alert) {
+        console.log(alert);
       } else {
         // These lines will only run AFTER the await above is done
         const sortedData = data.sort((a, b) => a.id - b.id);
@@ -28,13 +32,13 @@ function App() {
       }
     }
     async function getInitialCart(){
-      const {data, error} = await supabase
+      const {data, alert} = await supabase
         .from('User Carts')
         .select('cart_items')
         .eq('user_id',1)
         .single()
       setInitialCart(data.cart_items);
-      if(error) console.log(error)
+      if(alert) console.log(alert)
     }
     getAllData();
     getInitialCart();
@@ -43,7 +47,7 @@ function App() {
   function HomePage(){
     return (
       <>
-        <Header active="home" setCurrentPage={setCurrentPage}></Header>
+        <Header active="home" setCurrentPage={setCurrentPage} loggedIn={loggedIn}></Header>
         <Slider></Slider>
         <Categories></Categories>
       </>
@@ -53,81 +57,20 @@ function App() {
   function ShopPage(){
     return(
       <>
-        <Header active="shop" setCurrentPage={setCurrentPage}></Header>
+        <Header active="shop" setCurrentPage={setCurrentPage} loggedIn={loggedIn} ></Header>
         <h2>All Products</h2>
-        <ProductCards products={products} initialCart={initialCart}></ProductCards>
+        <ProductCards products={products} initialCart={initialCart} images={images}></ProductCards>
       </>
     )
   }
 
   return (
     <>
-      {currentPage=='home'? <HomePage setCurrentPage={setCurrentPage}/>: <ShopPage setCurrentPage={setCurrentPage}/>}
+      {currentPage=='home'? <HomePage setCurrentPage={setCurrentPage}/>: ( currentPage=='shop' ? <ShopPage setCurrentPage={setCurrentPage}/> : <Login setLoggedIn={setLoggedIn} setUser={setUser} setCurrentPage={setCurrentPage} />)}
     </>
   )
 }
 
-function ProductCards({products, initialCart}){
-  const [cartItems,setCartItems]=useState(initialCart);
-  function getQuantity(productId) {
-    const found = cartItems.items.find((item) => item.id === productId);
-    return found ? found.quantity : 0;
-  }
-  const productCards=products.map((product)=> <Card key={product.id} product={product} cartItems={cartItems} setCartItems={setCartItems} quantity={getQuantity(product.id)} />)
-  return(
-    <div className='products'>
-      {productCards}
-    </div>
-  )
-}
 
-function Card({product, cartItems, setCartItems, quantity}){
-  async function updateCart(prodID,qty){
-    let newCart= {...cartItems};
-    const prodIndex = newCart.items.findIndex((p) => p.id === prodID);
-    if(qty<1){
-      if (prodIndex !== -1) newCart.items.splice(prodIndex, 1);
-    }
-    else if (prodIndex !== -1) {
-      newCart.items[prodIndex].quantity = qty;
-    }
-    else {
-      newCart.items.push({ id: prodID, quantity: qty });
-    }
-    setCartItems(newCart);
-    const { error } = await supabase
-      .from('User Carts')
-      .update({ cart_items: newCart })
-      .eq('user_id', 1)
-    if(error) console.log(error)
-
-  }
-  function getImage(imageName) {
-    const entry= Object.entries(images).find(([path]) =>
-      path.endsWith(`/${imageName}`)
-    )
-    return entry?entry[1]:undefined;
-  }
-  const imageSrc=getImage(product.image_file);
-  const quantityCounter= (
-    <div className="quantity">
-      <button className="decrement" onClick={()=>updateCart(product.id,quantity-1)}>-</button>
-      <div className="quantity-count">{quantity}</div>
-      <button className="increment" onClick={()=>updateCart(product.id,quantity+1)}>+</button>
-    </div>
-  )
-  return(
-    <div className="product-card">
-      <div className="image-container">{imageSrc && <img src={imageSrc} alt={product.name} />}</div>
-      <div className="text">
-        <h3>{product.name}</h3>
-        <div className="product-info">
-          <div className="price">&#8377;{' '}{new Intl.NumberFormat('en-IN').format(product.price)}</div>
-          {quantity>0 ? quantityCounter : <button className='cart-count' onClick={()=>updateCart(product.id,1)}>Add to Cart</button>}
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export default App

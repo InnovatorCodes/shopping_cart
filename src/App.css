@@ -83,7 +83,7 @@ body{
   gap: 1rem;
 }
 
-.login{
+.login-btn{
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -97,10 +97,10 @@ body{
   overflow: hidden;
   color: black;
 }
-.login:hover{
+.login-btn:hover{
   color: white;
 }
-.login::after{
+.login-btn::after{
   content: '';
   z-index: -1;
   background-color: black;
@@ -112,7 +112,7 @@ body{
   transform: translateY(101%);
   transition: 0.3s;
 }
-.login:hover::after{
+.login-btn:hover::after{
   transform: translateY(0);
 }
 .buttons img{
@@ -355,6 +355,7 @@ body{
   color: white;
   will-change: contents;
   align-self: flex-end;
+  height: 2.5rem;
 }
 .product-info button:hover{
   transform: scale(1.1);
@@ -367,6 +368,7 @@ body{
   border: 1px solid black;
   border-radius: 1.4rem;
   font-weight: 600;
+  height: 2.5rem;
 }
 
 .quantity button{
@@ -374,4 +376,79 @@ body{
   background: none;
   color: black;
   font-size: 1.3rem;
+}
+
+.login{
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 3rem;
+  width: 500px;
+  border-radius: 1rem;
+  color: black;
+  box-shadow: 0 0 4px black;
+  font-family: "Raleway";
+}
+.login>div{
+  position: relative;
+}
+.login label{
+  position: absolute;
+  top: 50%;
+  color: black;
+  left: 0.4rem;
+  transform: translateY(-50%);
+  background: white;
+  pointer-events: none;
+  padding: 0 0.3rem;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  will-change: contents;
+}
+.login input{
+  background: white;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: black;
+  width: 100%;
+  padding-right: 3rem;
+}
+.login input:focus + label,
+.login input:not(:placeholder-shown)+ label{
+  top: 0;
+  transform: translateY(-50%) scale(0.9);
+  background-color: white;
+}
+.login input.touched:invalid{
+  border:1px solid red;
+}
+.login button{
+  background-color: #24A0ED;
+  color: white;
+  padding: 1rem;
+}
+.login h2{
+  margin-bottom: 1rem;
+}
+.login .alert{
+  align-self: flex-start;
+  color: red;
+}
+.password svg,
+.conf-password svg{
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 70%;
+  background-color: white;
+  width: min-content;
+}
+.show-password:hover,.show-conf-password:hover{
+  cursor: pointer;
 }
