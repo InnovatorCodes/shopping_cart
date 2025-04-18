@@ -20,7 +20,13 @@ export default function Header({active,setCurrentPage, loggedIn}){
         <div className={`link shop ${active=='shop'?'active':''}`} onClick={()=>{active!='shop'? setCurrentPage('shop'): null}}>Shop</div>
       </div>
       <div className="buttons">
-        <button className="cart"><img src={cartSVG} alt="cart" /></button>
+        <button 
+        className="cart" 
+        onClick={
+          loggedIn ? ()=>setCurrentPage('cart') : ()=>setCurrentPage('login')
+        }>
+          <img src={cartSVG} alt="cart" />
+        </button>
         {loggedIn? <img src={userSVG} alt="User Profile" /> :loginBtn}
       </div>
     </div>

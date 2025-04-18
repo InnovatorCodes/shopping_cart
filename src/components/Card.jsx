@@ -1,24 +1,28 @@
 import { supabase } from "./supabaseClient";
 
-export default function Card({product, cartItems, setCartItems, quantity, images}){
+export default function Card({product, cartItems, setCartItems, quantity, images, userID, setCurrentPage}){
     async function updateCart(prodID,qty){
-        let newCart= {...cartItems};
-        const prodIndex = newCart.items.findIndex((p) => p.id === prodID);
-        if(qty<1){
-            if (prodIndex !== -1) newCart.items.splice(prodIndex, 1);
-        }
-        else if (prodIndex !== -1) {
-            newCart.items[prodIndex].quantity = qty;
-        }
-        else {
-            newCart.items.push({ id: prodID, quantity: qty });
-        }
-        setCartItems(newCart);
-        const { alert } = await supabase
+        if(userID){
+            let newCart= {...cartItems};
+            const prodIndex = newCart.items.findIndex((p) => p.id === prodID);
+            if(qty<1){
+                if (prodIndex !== -1) newCart.items.splice(prodIndex, 1);
+            }
+            else if (prodIndex !== -1) {
+                newCart.items[prodIndex].quantity = qty;
+            }
+            else {
+                newCart.items.push({ id: prodID, quantity: qty });
+            }
+            setCartItems(newCart);
+            const { error } = await supabase
             .from('User Carts')
-            .update({ cart_items: newCart })
-            .eq('user_id', 1)
-        if(alert) console.log(alert)
+            .upsert(
+                { user_id: userID, cart_items: newCart },
+                { onConflict: ['user_id'] }
+            );
+            if(error) console.log(error)
+        }
     }
 
     function getImage(imageName) {
@@ -42,7 +46,16 @@ export default function Card({product, cartItems, setCartItems, quantity, images
             <h3>{product.name}</h3>
             <div className="product-info">
                 <div className="price">&#8377;{' '}{new Intl.NumberFormat('en-IN').format(product.price)}</div>
-                {quantity>0 ? quantityCounter : <button className='cart-count' onClick={()=>updateCart(product.id,1)}>Add to Cart</button>}
+                {quantity>0 ?
+                 quantityCounter: 
+                 <button
+                  className='cart-count' 
+                  onClick={()=>{
+                    if(!userID) setCurrentPage('login');
+                    else updateCart(product.id,1)
+                  }}>
+                    Add to Cart
+                 </button>}
             </div>
             </div>
         </div>
