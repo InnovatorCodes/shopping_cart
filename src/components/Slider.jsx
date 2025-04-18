@@ -3,10 +3,11 @@ import watchesImg from '../assets/smartwatches.png'
 import audioImg from '../assets/audio.png'
 import slideRight from '../assets/slideRight.svg'
 import slideLeft from '../assets/slideLeft.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Slider(){
   const [slideNumber,setSlideNumber]=useState(0)
+  //const timer=setInterval(()=>setSlideNumber((slideNum)=>(slideNum+1)%totalSlides),5000)
   const slideContents=[
     {image: phonesImg, title: "Best Offers on Smartphones - Limited Time!", desc: "Upgrade your mobile experience with incredible deals on top smartphones, featuring cutting-edge camera technology like the impressive multi-lens systems shown. Don't miss out – these offers are for a limited time only!"},
     {image: watchesImg, title: "Incredible Savings on Top Wearables", desc: "Elevate your wrist game! Discover limited-time deals on our top smartwatches, packed with features to track your health, connect you to your world, and look stylish while doing it. Don't wait, these offers won't last!"},
@@ -22,6 +23,11 @@ export default function Slider(){
     </div>
     <div className="image-container"><img src={content.image} alt="Offer Image" /></div>
   </div>)
+
+  useEffect(()=>{
+    const timer=setInterval(()=>setSlideNumber((slideNum)=>(slideNum+1)%totalSlides), 5000);
+    return ()=>clearInterval(timer);
+  },[totalSlides])
 
   return (
     <>

@@ -17,12 +17,13 @@ body{
 }
 #root {
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 #root>h2{
@@ -34,6 +35,7 @@ body{
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+  margin-bottom: 1rem;
 }
 .links{
   display: flex;
@@ -78,6 +80,7 @@ body{
   font-family: simplifica;
   font-weight: 600;
   font-size: 5rem;
+  line-height: 5rem;
 }
 .buttons{
   display: flex;
@@ -303,9 +306,22 @@ body{
   position: relative;
   object-fit: cover;
 }
+.shop-categories{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.shop-categories>button{
+  background-color: rgb(224, 224, 224);
+  padding: 1rem;
+}
+.shop-categories>button.selected{
+  background-color: white;
+  border: 1px solid black;
+}
 .products{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(30vw,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(30vw,1fr));
   gap: 1rem;
   padding-bottom: 1rem;
 }
@@ -409,7 +425,6 @@ body{
   color: black;
   font-size: 1.3rem;
 }
-
 .login{
   margin: auto;
   background-color: rgb(255, 255, 255);
@@ -474,6 +489,16 @@ body{
   align-self: flex-start;
   color: red;
 }
+.login h1{
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  font-family: simplifica;
+  font-size: 5rem;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 5rem;
+}
 .password svg,
 .conf-password svg{
   position: absolute;
@@ -508,7 +533,7 @@ body{
   padding: 1rem;
   border-radius: 1rem;
   gap: 1rem;
-  flex: 1 1 auto;
+  flex: 1 1 50%;
 }
 .cart-item{
   display: grid;
@@ -545,12 +570,9 @@ body{
 .order-summary{
   display: flex;
   flex-direction: column;
-  flex: 1 1 50%;
+  flex: 1 1 25%;
   gap: 1rem;
-  background-color:#eeeeee;
   color: black;
-  padding: 1rem;
-  border-radius: 1rem;
   font-family: "Raleway";
   font-size: 1.2rem;
   height: min-content;
@@ -562,4 +584,67 @@ body{
 .order-summary .total{
   font-size: 1.4rem;
   font-weight: 600;
+}
+.totals{
+  display: flex;
+  flex-direction: column;
+  background-color:#eeeeee;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 1rem;
+}
+button.place-order{
+  background-color: #24A0ED;
+  color: white;
+  padding: 1rem 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+button.place-order::after{
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: -100%;
+  top:0;
+  background-color: #1c8ed4;
+  transition: all 0.7s ease-in-out;
+  z-index: -1;
+}
+button.place-order:hover::after{
+  left: 0;
+}
+.empty-cart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  gap: 1rem;
+}
+.empty-cart img{
+  width: max(300px, 15vw);
+}
+.empty-cart button{
+  background-color: #24A0ED;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.6rem;
+}
+.order-placed{
+  font-family: "Raleway";
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.order-placed svg{
+  width: 200px;
+}
+button.continue-shopping{
+  background-color: #24A0ED;
+  width: 20%;
+  padding: 1rem;
+  color: white;
 }

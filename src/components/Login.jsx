@@ -45,6 +45,7 @@ export default function Login({setUser, setLoggedIn, setCurrentPage}){
     return (
       <>
         <form action="" className='login' onSubmit={login}>
+          <h1 onClick={()=>setCurrentPage('home')}>LUNO</h1>
           <h2>Login Here</h2>
           <div className="email">
             <input type="email"
@@ -75,7 +76,7 @@ export default function Login({setUser, setLoggedIn, setCurrentPage}){
           </div>
           <div className="alert">{alert}</div>
           <button type="submit" onClick={()=>setTouched(true)}>Log In</button>
-          <p>New to Luno? Sign Up</p>
+          <p>New to Luno? <span onClick={()=>setCurrentPage('signup')}>Sign Up</span></p>
         </form>
       </>
     )
