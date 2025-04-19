@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { supabase } from "./components/supabaseClient";
-import PropTypes from "prop-types";
 import { useNavigate, useOutletContext,Link } from "react-router-dom";
 
 export default function SignupPage(){
@@ -128,8 +127,4 @@ export default function SignupPage(){
       <p>Already have an Account? <Link to="/login"><span>Log In</span></Link></p>
     </form>
   )
-}
-
-SignupPage.propTypes={
-  setUser: PropTypes.func.isRequired
 }

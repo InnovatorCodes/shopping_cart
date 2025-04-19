@@ -8,6 +8,11 @@ export default function CartPage(){
   const {cart,setCart, products, user,setUser,images}=useOutletContext();
   const navigate=useNavigate();
   if(user==null) navigate('/');
+  CartSummary.propTypes={
+    cart: PropTypes.object.isRequired,
+    products: PropTypes.object.isRequired,
+    images: PropTypes.object.isRequired
+  }
   return(
     <div className='cart-page'>
       <Header active="cart" user={user} setUser={setUser}></Header>
@@ -94,6 +99,7 @@ export default function CartPage(){
         </div>
       </div>
     )
+
     return(
       <div className="empty-cart">
         <img src={emptyCartImg} alt="Empty Cart" />
@@ -106,13 +112,5 @@ export default function CartPage(){
       </div>
     )
   }
-}
-
-CartPage.propTypes={
-  cart: PropTypes.object.isRequired,
-  products: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  images: PropTypes.object.isRequired,
-  setCart: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
+  
 }

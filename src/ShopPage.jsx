@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import Header from "./components/Header";
 import ProductCards from "./components/ProductCards";
 import { useOutletContext } from "react-router-dom";
@@ -44,15 +43,4 @@ export default function ShopPage(){
       <ProductCards products={products} cart={cart} setCart={setCart} images={images} userID={user ? user.user_id: null} filter={filter}></ProductCards>
     </>
   )
-}
-
-ShopPage.propTypes={
-  products: PropTypes.object.isRequired,
-  cart: PropTypes.object.isRequired,
-  images: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  filter: PropTypes.string.isRequired,
-  setCart: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
-  setFilter: PropTypes.func.isRequired
 }

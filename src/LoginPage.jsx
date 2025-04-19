@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { supabase } from './components/supabaseClient';
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 export default function Login(){
   const {setUser} = useOutletContext();
@@ -83,8 +82,4 @@ export default function Login(){
       </form>
     </>
   )
-}
-  
-Login.propTypes={
-  setUser: PropTypes.func.isRequired,
 }
