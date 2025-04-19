@@ -1,6 +1,6 @@
 @font-face {
   font-family: simplifica;
-  src: url(./assets/simplifica.ttf);
+  src: url(./assets/fonts/simplifica.ttf);
 }
 *{
   margin: 0;
@@ -96,7 +96,6 @@ body{
   padding: 0.3rem;
   padding-right: 0.5rem;
   background: none;
-  color: white;
   position: relative;
   overflow: hidden;
   color: black;
@@ -117,6 +116,65 @@ body{
   transition: 0.3s;
 }
 .login-btn:hover::after{
+  transform: translateY(0);
+}
+.user{
+  position: relative;
+  cursor: pointer;
+}
+.profile-dropdown{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  display: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  height: min-content;
+  width: max-content;
+  align-items: center;
+}
+.profile-dropdown h3{
+  margin-bottom: 1rem;
+}
+.user:hover .profile-dropdown{
+  display: flex;
+  background-color: white;
+  border: 1px solid black;
+  flex-direction: column;
+  transform: translateY(100%);
+}
+.logout-btn{
+  display: flex;
+  align-self: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  border: 1px solid #ED1C24;
+  padding: 0.3rem;
+  padding-right: 0.5rem;
+  background: none;
+  position: relative;
+  overflow: hidden;
+  color: #ED1C24;
+}
+.logout-btn:hover{
+  color: white;
+  border: 1px solid #ED1C24;
+}
+.logout-btn::after{
+  content: '';
+  z-index: -1;
+  background-color: #ED1C24;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  transform: translateY(101%);
+  transition: 0.3s;
+}
+.logout-btn:hover::after{
   transform: translateY(0);
 }
 .buttons img{
@@ -176,7 +234,8 @@ body{
   max-height: 100%;
   width: 100%;
   object-fit: cover;
-  min-width: clamp(800px,50%,1100px)
+  min-width: clamp(800px,50%,1100px);
+  cursor:pointer;
 }
 .slide .text{
   flex: 1 1 100%;

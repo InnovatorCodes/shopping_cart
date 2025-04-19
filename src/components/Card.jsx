@@ -1,9 +1,9 @@
 import { supabase } from "./supabaseClient";
 
-export default function Card({product, cartItems, setCartItems, quantity, images, userID, setCurrentPage}){
+export default function Card({product, cart, setCart, quantity, images, userID, setCurrentPage}){
     async function updateCart(prodID,qty){
         if(userID){
-            let newCart= {...cartItems};
+            let newCart= {...cart};
             const prodIndex = newCart.items.findIndex((p) => p.id === prodID);
             if(qty<1){
                 if (prodIndex !== -1) newCart.items.splice(prodIndex, 1);
@@ -14,7 +14,7 @@ export default function Card({product, cartItems, setCartItems, quantity, images
             else {
                 newCart.items.push({ id: prodID, quantity: qty });
             }
-            setCartItems(newCart);
+            setCart(newCart);
             const { error } = await supabase
             .from('User Carts')
             .upsert(

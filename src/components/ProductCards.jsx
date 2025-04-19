@@ -1,10 +1,8 @@
-import { useState } from "react";
 import Card from "./Card";
 
-export default function ProductCards({products, cart, images, userID, loading, setCurrentPage,filter}){
-    const [cartItems,setCartItems]=useState(cart);
+export default function ProductCards({products, cart, setCart, images, userID, setCurrentPage,filter}){
     function getQuantity(productId) {
-      const found = cartItems.items.find((item) => item.id === productId);
+      const found = cart.items.find((item) => item.id === productId);
       return found ? found.quantity : 0;
     }
     const loader=<span class="loader"></span>;
@@ -32,12 +30,12 @@ export default function ProductCards({products, cart, images, userID, loading, s
         default:
           break;
       }
-      if(valid) return <Card key={product.id} product={product} cartItems={cartItems} setCartItems={setCartItems} quantity={getQuantity(product.id)} images={images} userID={userID} setCurrentPage={setCurrentPage}/>
+      if(valid) return <Card key={product.id} product={product} cart={cart} setCart={setCart} quantity={getQuantity(product.id)} images={images} userID={userID} setCurrentPage={setCurrentPage}/>
       return null;
     })
     return(
       <div className='products'>
-        {loading? loader :productCards}
+        {products=={} ? loader :productCards}
       </div>
     )
 }
