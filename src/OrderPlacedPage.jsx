@@ -1,6 +1,8 @@
-import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-export default function OrderPlacedPage({setCurrentPage}){
+
+export default function OrderPlacedPage(){
+  const navigate=useNavigate();
   const orderSuccess=(
     <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -19,11 +21,7 @@ export default function OrderPlacedPage({setCurrentPage}){
         <p>We’ve received your order and it will be processed shortly. Your items are expected to be delivered within 3–4 business days.</p>
         <p>Just Kidding. Thanks for Checking out my Website though.</p>
       </div>
-      <button className="continue-shopping" onClick={()=>setCurrentPage('shop')}>Continue Shopping</button>
+      <button className="continue-shopping" onClick={()=>navigate('/shop')}>Continue Shopping</button>
     </div>
   )
-}
-
-OrderPlacedPage.propTypes={
-  setCurrentPage: PropTypes.func.isRequired
 }

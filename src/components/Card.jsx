@@ -1,7 +1,9 @@
 import { supabase } from "./supabaseClient";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function Card({product, cart, setCart, quantity, images, userID, setCurrentPage}){
+export default function Card({product, cart, setCart, quantity, images, userID}){
+    const navigate=useNavigate();
     async function updateCart(prodID,qty){
         if(userID){
             let newCart= {...cart};
@@ -52,7 +54,7 @@ export default function Card({product, cart, setCart, quantity, images, userID, 
                  <button
                   className='cart-count' 
                   onClick={()=>{
-                    if(!userID) setCurrentPage('login');
+                    if(!userID) navigate('/login');
                     else updateCart(product.id,1)
                   }}>
                     Add to Cart

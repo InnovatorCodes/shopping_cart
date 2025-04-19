@@ -2,12 +2,15 @@ import { supabase } from "./components/supabaseClient";
 import emptyCartImg from './assets/emptyCart.webp'
 import Header from "./components/Header";
 import PropTypes from "prop-types";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-export default function CartPage({cart,setCart, products, user,setUser, setCurrentPage,images}){
-  if(user==null) setCurrentPage('home');
+export default function CartPage(){
+  const {cart,setCart, products, user,setUser,images}=useOutletContext();
+  const navigate=useNavigate();
+  if(user==null) navigate('/');
   return(
     <div className='cart-page'>
-      <Header active="cart" setCurrentPage={setCurrentPage} user={user} setUser={setUser}></Header>
+      <Header active="cart" user={user} setUser={setUser}></Header>
       <h2>My Cart</h2>
       <CartSummary cart={cart} products={products} images={images} />
     </div>
@@ -61,7 +64,7 @@ export default function CartPage({cart,setCart, products, user,setUser, setCurre
     })
     async function placeOrder(){
       setCart({items: []});
-      setCurrentPage('order placed');
+      navigate('/order-placed')
       const { error } = await supabase
       .from('User Carts')
       .update({ cart_items: {items:[]} })
@@ -99,7 +102,7 @@ export default function CartPage({cart,setCart, products, user,setUser, setCurre
           <p>Looks like you haven’t added anything to your Cart just yet.</p>
           <p>Browse our collection and find something you love — your next favorite product might be just a click away! </p>
         </div>
-        <button onClick={()=>setCurrentPage('shop')}>Continue Shopping</button>
+        <button onClick={()=>navigate('/shop')}>Continue Shopping</button>
       </div>
     )
   }
@@ -112,5 +115,4 @@ CartPage.propTypes={
   images: PropTypes.object.isRequired,
   setCart: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
-  setCurrentPage: PropTypes.func.isRequired
 }

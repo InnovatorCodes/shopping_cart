@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Card from "./Card";
 
-export default function ProductCards({products, cart, setCart, images, userID, setCurrentPage,filter}){
+export default function ProductCards({products, cart, setCart, images, userID,filter}){
     function getQuantity(productId) {
       const found = cart.items.find((item) => item.id === productId);
       return found ? found.quantity : 0;
@@ -31,7 +31,7 @@ export default function ProductCards({products, cart, setCart, images, userID, s
         default:
           break;
       }
-      if(valid) return <Card key={product.id} product={product} cart={cart} setCart={setCart} quantity={getQuantity(product.id)} images={images} userID={userID} setCurrentPage={setCurrentPage}/>
+      if(valid) return <Card key={product.id} product={product} cart={cart} setCart={setCart} quantity={getQuantity(product.id)} images={images} userID={userID}/>
       return null;
     })
     return(
@@ -48,5 +48,4 @@ ProductCards.propTypes={
   userID: PropTypes.number.isRequired,
   filter: PropTypes.string.isRequired,
   setCart: PropTypes.func.isRequired,
-  setCurrentPage: PropTypes.func.isRequired
 }

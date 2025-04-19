@@ -1,14 +1,16 @@
 import Header from "./components/Header"
 import Slider from "./components/Slider"
 import Categories from "./components/Categories"
+import { useOutletContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function HomePage({setFilter, setCurrentPage, user, setUser}){
+export default function HomePage(){
+  const { user, setUser, setFilter } = useOutletContext();
   return (
     <>
-      <Header active="home" setCurrentPage={setCurrentPage} user={user} setUser={setUser}></Header>
-      <Slider setFilter={setFilter} setCurrentPage={setCurrentPage}></Slider>
-      <Categories setFilter={setFilter} setCurrentPage={setCurrentPage}></Categories>
+      <Header active="home" user={user} setUser={setUser}></Header>
+      <Slider setFilter={setFilter}></Slider>
+      <Categories setFilter={setFilter}></Categories>
     </>
   )
 }

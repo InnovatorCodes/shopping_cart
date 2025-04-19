@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { supabase } from "./components/supabaseClient";
 import PropTypes from "prop-types";
+import { useNavigate, useOutletContext,Link } from "react-router-dom";
 
-export default function SignupPage({setUser,setCurrentPage}){
+export default function SignupPage(){
+  const {setUser} = useOutletContext
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const [confPassword,setConfPassword]=useState("");
@@ -11,6 +13,8 @@ export default function SignupPage({setUser,setCurrentPage}){
   const [showConfPassword, setShowConfPassword]= useState(false);
   const [alert,setAlert]=useState('');
   const [touched,setTouched] =useState(false);
+
+  const navigate=useNavigate();
   
   const showPasswordBtn=(
     <svg width="800px" height="800px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +68,14 @@ export default function SignupPage({setUser,setCurrentPage}){
       else {
         console.log('hi')
         setUser({user_id: newUser.user_id, full_name: newUser.full_name})
-        setCurrentPage('home');
+        navigate('/');
       }
     }
   }
 
   return(
     <form action="" className='login' onSubmit={signup}>
+      <Link to="/"><h1>LUNO</h1></Link>
       <h2>Sign Up</h2>
       <div className="email">
         <input type="email"
@@ -120,12 +125,11 @@ export default function SignupPage({setUser,setCurrentPage}){
       </div>
       <div className="alert">{alert}</div>
       <button type="submit" onClick={()=>setTouched(true)}>Sign Up</button>
-      <p>Already have an Account? Log In</p>
+      <p>Already have an Account? <Link to="/login"><span>Log In</span></Link></p>
     </form>
   )
 }
 
 SignupPage.propTypes={
-  setUser: PropTypes.func.isRequired,
-  setCurrentPage: PropTypes.func.isRequired
+  setUser: PropTypes.func.isRequired
 }

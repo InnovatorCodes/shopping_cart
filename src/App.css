@@ -7,6 +7,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+a, a:hover{
+  text-decoration: none;
+  color: inherit;
+}
+span{
+  text-decoration: underline;
+  color: #24A0ED;
+}
 html{
   height: 100%;
   font-family: sans-serif;

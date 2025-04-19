@@ -1,11 +1,6 @@
 import './App.css'
-import HomePage from './HomePage';
-import ShopPage from './ShopPage';
-import CartPage from './CartPage';
-import OrderPlacedPage from './OrderPlacedPage';
-import SignupPage from './SignupPage';
-import Login from './LoginPage';
 import loginBG from './assets/loginBG.jpg'
+import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from './components/supabaseClient';
 
@@ -14,11 +9,13 @@ const images = import.meta.glob('./assets/product_images/*.{jpg,jpeg,png,avif,we
 function App() {
   const [products, setProducts]=useState({});
   const [cart, setCart]=useState({items: []});
-  const [currentPage, setCurrentPage]=useState('home');
   const [user,setUser]=useState(null);
   const [filter,setFilter]=useState('ALL');
 
-  document.body.style.backgroundImage= (currentPage=='login'|| currentPage=='signup')? `url(${loginBG})` :"";
+  const location = useLocation();
+  useEffect(()=>{
+    document.body.style.backgroundImage= (location.pathname=='/login'|| location.pathname=='/signup')? `url(${loginBG})` :"";
+  },[location.pathname]);
   useEffect(() => {
     async function getProducts() {
       const { data, error } = await supabase
@@ -46,13 +43,17 @@ function App() {
   }, [user]);
   
   return (
-    <>
-      { currentPage=='home'? <HomePage setCurrentPage={setCurrentPage} setFilter={setFilter} user={user} setUser={setUser} />: 
-      ( currentPage=='shop' ? <ShopPage products={products} cart={cart} setCart={setCart} images={images} user={user} setUser={setUser} setCurrentPage={setCurrentPage} filter={filter} setFilter={setFilter}/> :   
-      ( currentPage=='cart'? <CartPage cart={cart} setCart={setCart} products={products} user={user} setUser={setUser} setCurrentPage={setCurrentPage} images={images} />: 
-      ( currentPage=='order placed'? <OrderPlacedPage setCurrentPage={setCurrentPage} />: 
-      ( currentPage=='signup'? <SignupPage setUser={setUser} setCurrentPage={setCurrentPage}/>: <Login setUser={setUser} setCurrentPage={setCurrentPage} />))))}
-    </>
+    <Outlet context={{
+      user,
+      setUser,
+      products,
+      setProducts,
+      cart,
+      setCart,
+      filter,
+      setFilter,
+      images
+    }}/>
   )
 }
 

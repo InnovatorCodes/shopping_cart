@@ -1,10 +1,12 @@
 import cartSVG from '../assets/cart.svg';
 import userSVG from '../assets/userProfile.svg'
+import { useNavigate, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function Header({active,setCurrentPage,user,setUser}){
+export default function Header({active,user,setUser}){
+  const navigate=useNavigate();
   const loginBtn=(
-    <button className="login-btn" onClick={()=>setCurrentPage('login')}>
+    <button className="login-btn" onClick={()=>navigate('/login')}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
         <path d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M2 12H14.88" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -34,15 +36,16 @@ export default function Header({active,setCurrentPage,user,setUser}){
     <div className='header'>
       <h1>LUNO</h1>
       <div className="links">
-        <div className={`link home ${active=='home'?'active':''}`} onClick={()=>{active!='home'? setCurrentPage('home'): null}}>Home</div>
-        <div className={`link shop ${active=='shop'?'active':''}`} onClick={()=>{active!='shop'? setCurrentPage('shop'): null}}>Shop</div>
+        <Link to="/"><div className={`link home ${active=='home'?'active':''}`} >Home</div></Link>
+        <Link to="/shop"><div className={`link shop ${active=='shop'?'active':''}`}>Shop</div></Link>
       </div>
       <div className="buttons">
         <button 
         className="cart" 
-        onClick={
-          user ? ()=>setCurrentPage('cart') : ()=>setCurrentPage('login')
-        }>
+        onClick={()=>{
+          if(user) navigate('/cart');
+          else navigate('/login');
+        }}>
           <img src={cartSVG} alt="cart" />
         </button>
         {user? 
@@ -61,7 +64,6 @@ export default function Header({active,setCurrentPage,user,setUser}){
 
 Header.propTypes={
   active: PropTypes.oneOf(['home','shop']).isRequired,
-  setCurrentPage: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   setUser: PropTypes.func.isRequired
 }

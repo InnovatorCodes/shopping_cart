@@ -4,10 +4,12 @@ import audioImg from '../assets/audio.png'
 import slideRight from '../assets/slideRight.svg'
 import slideLeft from '../assets/slideLeft.svg'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-export default function Slider({setFilter, setCurrentPage}){
+export default function Slider({setFilter}){
   const [slideNumber,setSlideNumber]=useState(0);
+  const navigate=useNavigate();
   const slideContents=[
     {image: phonesImg, title: "Best Offers on Smartphones - Limited Time!", filter: "ST", desc: "Upgrade your mobile experience with incredible deals on top smartphones, featuring cutting-edge camera technology like the impressive multi-lens systems shown. Don't miss out – these offers are for a limited time only!"},
     {image: watchesImg, title: "Incredible Savings on Top Wearables", filter:"AW", desc: "Elevate your wrist game! Discover limited-time deals on our top smartwatches, packed with features to track your health, connect you to your world, and look stylish while doing it. Don't wait, these offers won't last!"},
@@ -17,7 +19,7 @@ export default function Slider({setFilter, setCurrentPage}){
   const slides=slideContents.map((content,index)=>{
     const filterResults=()=>{
       setFilter(content.filter);
-      setCurrentPage('shop');
+      navigate('/shop');
     }
     return (
     <div key={index} className='slide'>
@@ -51,6 +53,5 @@ export default function Slider({setFilter, setCurrentPage}){
 }
 
 Slider.propTypes={
-  setFilter: PropTypes.func.isRequired,
-  setCurrentPage: PropTypes.func.isRequired
+  setFilter: PropTypes.func.isRequired
 }

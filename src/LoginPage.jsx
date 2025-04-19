@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { supabase } from './components/supabaseClient';
+import { useNavigate, useOutletContext, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function Login({setUser, setCurrentPage}){
+export default function Login(){
+  const {setUser} = useOutletContext();
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const [showPassword, setShowPassword]=useState(false);
   const [alert,setAlert]=useState('');
   const [touched,setTouched] =useState(false);
+  const navigate=useNavigate();
 
   async function login(event) {
     event.preventDefault();
@@ -23,7 +26,7 @@ export default function Login({setUser, setCurrentPage}){
       else if(data.password==password){
         console.log('hi')
         setUser({user_id: data.user_id, full_name: data.full_name})
-        setCurrentPage('home');
+        navigate('/');
       }
     }
   }
@@ -45,7 +48,7 @@ export default function Login({setUser, setCurrentPage}){
   return (
     <>
       <form action="" className='login' onSubmit={login}>
-        <h1 onClick={()=>setCurrentPage('home')}>LUNO</h1>
+        <Link to="/"><h1>LUNO</h1></Link>
         <h2>Login Here</h2>
         <div className="email">
           <input type="email"
@@ -76,7 +79,7 @@ export default function Login({setUser, setCurrentPage}){
         </div>
         <div className="alert">{alert}</div>
         <button type="submit" onClick={()=>setTouched(true)}>Log In</button>
-        <p>New to Luno? <span onClick={()=>setCurrentPage('signup')}>Sign Up</span></p>
+        <p>New to Luno? <Link to="/signup"><span>Sign Up</span></Link></p>
       </form>
     </>
   )
@@ -84,5 +87,4 @@ export default function Login({setUser, setCurrentPage}){
   
 Login.propTypes={
   setUser: PropTypes.func.isRequired,
-  setCurrentPage: PropTypes.func.isRequired
 }
