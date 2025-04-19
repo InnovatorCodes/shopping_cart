@@ -1,6 +1,7 @@
 import { supabase } from "./components/supabaseClient";
 import emptyCartImg from './assets/emptyCart.webp'
 import Header from "./components/Header";
+import PropTypes from "prop-types";
 
 export default function CartPage({cart,setCart, products, user,setUser, setCurrentPage,images}){
   if(user==null) setCurrentPage('home');
@@ -102,4 +103,14 @@ export default function CartPage({cart,setCart, products, user,setUser, setCurre
       </div>
     )
   }
+}
+
+CartPage.propTypes={
+  cart: PropTypes.object.isRequired,
+  products: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  images: PropTypes.object.isRequired,
+  setCart: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
 }

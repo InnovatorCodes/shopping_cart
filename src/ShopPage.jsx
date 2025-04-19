@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Header from "./components/Header";
 import ProductCards from "./components/ProductCards";
 
@@ -41,4 +42,16 @@ export default function ShopPage({products,cart,setCart, images,user,setUser,set
         <ProductCards products={products} cart={cart} setCart={setCart} images={images} userID={user ? user.user_id: null} setCurrentPage={setCurrentPage} filter={filter}></ProductCards>
       </>
     )
+}
+
+ShopPage.propTypes={
+  products: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired,
+  images: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  filter: PropTypes.string.isRequired,
+  setCart: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  setFilter: PropTypes.func.isRequired
 }

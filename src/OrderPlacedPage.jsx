@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 
 export default function OrderPlacedPage({setCurrentPage}){
   const orderSuccess=(
@@ -21,4 +22,8 @@ export default function OrderPlacedPage({setCurrentPage}){
       <button className="continue-shopping" onClick={()=>setCurrentPage('shop')}>Continue Shopping</button>
     </div>
   )
+}
+
+OrderPlacedPage.propTypes={
+  setCurrentPage: PropTypes.func.isRequired
 }

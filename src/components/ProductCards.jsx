@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Card from "./Card";
 
 export default function ProductCards({products, cart, setCart, images, userID, setCurrentPage,filter}){
@@ -39,4 +40,13 @@ export default function ProductCards({products, cart, setCart, images, userID, s
       </div>
     )
 }
-  
+
+ProductCards.propTypes={
+  products: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired,
+  images: PropTypes.object.isRequired,
+  userID: PropTypes.number.isRequired,
+  filter: PropTypes.string.isRequired,
+  setCart: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
+}

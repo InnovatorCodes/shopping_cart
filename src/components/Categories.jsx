@@ -3,6 +3,7 @@ import compAccessories from '../assets/compAcc.avif'
 import phoneTab from '../assets/phonetab.png';
 import gamingVR from '../assets/gamingvr.webp';
 import smartHome from '../assets/smarthome.webp';
+import PropTypes from 'prop-types';
 
 export default function Categories({setFilter, setCurrentPage}){
   const categories=["Audio & Wearables","Computers & Accessories","Smartphones & Tablets","Smart Home Devices","Gaming & VR"]
@@ -29,4 +30,9 @@ export default function Categories({setFilter, setCurrentPage}){
       </div>
     </>
   )
+}
+
+Categories.propTypes={
+  setFilter: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
 }

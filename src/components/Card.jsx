@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseClient";
+import PropTypes from "prop-types";
 
 export default function Card({product, cart, setCart, quantity, images, userID, setCurrentPage}){
     async function updateCart(prodID,qty){
@@ -60,4 +61,13 @@ export default function Card({product, cart, setCart, quantity, images, userID, 
             </div>
         </div>
     )
+}
+
+Card.propTypes={
+    products: PropTypes.object.isRequired,
+    cart: PropTypes.object.isRequired,
+    images: PropTypes.object.isRequired,
+    userID: PropTypes.number.isRequired,
+    setCart: PropTypes.func.isRequired,
+    setCurrentPage: PropTypes.func.isRequired
 }

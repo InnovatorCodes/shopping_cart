@@ -1,5 +1,6 @@
 import cartSVG from '../assets/cart.svg';
 import userSVG from '../assets/userProfile.svg'
+import PropTypes from 'prop-types';
 
 export default function Header({active,setCurrentPage,user,setUser}){
   const loginBtn=(
@@ -56,4 +57,11 @@ export default function Header({active,setCurrentPage,user,setUser}){
       </div>
     </div>
   )
+}
+
+Header.propTypes={
+  active: PropTypes.oneOf(['home','shop']).isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  setUser: PropTypes.func.isRequired
 }

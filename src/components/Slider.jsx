@@ -4,6 +4,7 @@ import audioImg from '../assets/audio.png'
 import slideRight from '../assets/slideRight.svg'
 import slideLeft from '../assets/slideLeft.svg'
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 export default function Slider({setFilter, setCurrentPage}){
   const [slideNumber,setSlideNumber]=useState(0);
@@ -47,4 +48,9 @@ export default function Slider({setFilter, setCurrentPage}){
       </div>
     </>
   )
+}
+
+Slider.propTypes={
+  setFilter: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
 }

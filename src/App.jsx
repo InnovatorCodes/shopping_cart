@@ -9,7 +9,6 @@ import loginBG from './assets/loginBG.jpg'
 import { useEffect, useState } from 'react';
 import { supabase } from './components/supabaseClient';
 
-
 const images = import.meta.glob('./assets/product_images/*.{jpg,jpeg,png,avif,webp}', { eager: true, query: '?url', import: 'default', });
 
 function App() {
@@ -52,7 +51,7 @@ function App() {
       ( currentPage=='shop' ? <ShopPage products={products} cart={cart} setCart={setCart} images={images} user={user} setUser={setUser} setCurrentPage={setCurrentPage} filter={filter} setFilter={setFilter}/> :   
       ( currentPage=='cart'? <CartPage cart={cart} setCart={setCart} products={products} user={user} setUser={setUser} setCurrentPage={setCurrentPage} images={images} />: 
       ( currentPage=='order placed'? <OrderPlacedPage setCurrentPage={setCurrentPage} />: 
-      ( currentPage=='signup'? <SignupPage setUser={setUser} setCurrentPage={setCurrentPage}/>: <Login setUser={setUser} setCurrentPage={setCurrentPage} />) )))}
+      ( currentPage=='signup'? <SignupPage setUser={setUser} setCurrentPage={setCurrentPage}/>: <Login setUser={setUser} setCurrentPage={setCurrentPage} />))))}
     </>
   )
 }

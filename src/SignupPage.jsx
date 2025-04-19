@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "./components/supabaseClient";
+import PropTypes from "prop-types";
 
 export default function SignupPage({setUser,setCurrentPage}){
   const [email,setEmail]=useState("");
@@ -122,4 +123,9 @@ export default function SignupPage({setUser,setCurrentPage}){
       <p>Already have an Account? Log In</p>
     </form>
   )
+}
+
+SignupPage.propTypes={
+  setUser: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
 }
