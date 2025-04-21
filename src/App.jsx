@@ -12,10 +12,16 @@ function App() {
   const [user,setUser]=useState(null);
   const [filter,setFilter]=useState('ALL');
 
+  if(!user){
+    const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+    if(storedUser) setUser(storedUser); 
+  }
+
   const location = useLocation();
   useEffect(()=>{
     document.body.style.backgroundImage= (location.pathname=='/login'|| location.pathname=='/signup')? `url(${loginBG})` :"";
   },[location.pathname]);
+
   useEffect(() => {
     async function getProducts() {
       const { data, error } = await supabase
@@ -41,6 +47,11 @@ function App() {
     getProducts();
     if(user) getInitialCart(user.user_id);
   }, [user]);
+
+  useEffect(()=>{
+    if(user) localStorage.setItem("user", JSON.stringify(user));
+    else localStorage.removeItem("user");
+  },[user])
   
   return (
     <Outlet context={{

@@ -485,7 +485,18 @@ body{
   font-weight: 600;
   height: 2.5rem;
 }
-
+input.quantity-count{
+  background-color: white;
+  color: black;
+  width: min-content;
+  border: 1px solid black;
+  width: 3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+}
+input.quantity-count:focus{
+  outline: none;
+}
 .quantity button{
   font-family: sans-serif;
   background: none;

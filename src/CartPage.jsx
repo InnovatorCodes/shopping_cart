@@ -3,11 +3,16 @@ import emptyCartImg from './assets/emptyCart.webp'
 import Header from "./components/Header";
 import PropTypes from "prop-types";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function CartPage(){
   const {cart,setCart, products, user,setUser,images}=useOutletContext();
   const navigate=useNavigate();
-  if(user==null) navigate('/');
+  useEffect(() => {
+    if (user == null) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
   CartSummary.propTypes={
     cart: PropTypes.object.isRequired,
     products: PropTypes.object.isRequired,
@@ -22,17 +27,91 @@ export default function CartPage(){
   )
   function CartSummary({cart,products, images}){
     let subTotal=0;
-    const itemCards=cart.items.map((cartItem)=>{
+    async function placeOrder(){
+      setCart({items: []});
+      navigate('/order-placed')
+      const { error } = await supabase
+      .from('User Carts')
+      .update({ cart_items: {items:[]} })
+      .eq('user_id', user.user_id)
+      .select()
+      if(error) console.log(error);
+    }
+    if(cart.items.length>0) {
+      const itemCards=cart.items.map((cartItem)=>{
+        const product = products[cartItem.id - 1];
+        const total = product.price * cartItem.quantity;
+        subTotal += total;
+        return <CartItem key={cartItem.id} cartItem={cartItem} />
+      })
+      return(
+        <div className='cart-summary'>
+          <div className="cart-items">
+            <div className="heading">
+              <h3 className="product">Product</h3>
+              <h3 className="quantity">Quantity</h3>
+              <h3 className="price">Price</h3>
+              <h3 className="total">Total</h3>
+            </div>
+            {itemCards}
+            </div>
+          <div className="order-summary">
+            <div className='totals'>
+              <div className="subtotal"><p>Subtotal</p><p>&#8377;{' '}{new Intl.NumberFormat('en-IN').format(subTotal)}</p></div>
+              <div className="shipping-charge"><p>Shipping Charges</p><p>&#8377;{' '}{new Intl.NumberFormat('en-IN').format(100)}</p></div>
+              <hr />
+              <div className="total"><p>Total</p><p>&#8377;{' '}{new Intl.NumberFormat('en-IN').format(subTotal+100)}</p></div>
+            </div>
+            <button className="place-order" onClick={placeOrder}>Place Order</button>
+          </div>
+        </div>
+      )
+    }
+
+    function CartItem({ cartItem }){
       let product=products[cartItem.id-1]
+      const [isEditing, setIsEditing]= useState(false);
+      const [inputQty, setInputQty] = useState(cartItem.quantity);
+
+      useEffect(() => {
+        setInputQty(cartItem.quantity); // Keep input in sync when cart updates from outside
+      }, [cartItem.quantity]);
+
       const quantityCounter= (
         <div className="quantity">
             <button className="decrement" onClick={()=>updateCart(cartItem.id,cartItem.quantity-1)}>-</button>
-            <div className="quantity-count">{cartItem.quantity}</div>
+            {
+              isEditing ? (
+                <input
+                  className="quantity-count"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={inputQty }
+                  onChange={(event) => {
+                    const value=event.target.value;
+                    if (/^\d*$/.test(value)) {
+                      setInputQty(value);
+                    }
+                  }}
+                  onBlur={() => {
+                    const finalQty = parseInt(inputQty);
+                    updateCart(cartItem.id, isNaN(finalQty) || finalQty < 1 ? 1 : finalQty);
+                    setIsEditing(false);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.target.blur(); // triggers onBlur
+                    }
+                  }}
+                  autoFocus
+                />
+              ) : ( <div className="quantity-count" onClick={() => setIsEditing(true)}>{cartItem.quantity}</div> )
+            }
             <button className="increment" onClick={()=>updateCart(cartItem.id,cartItem.quantity+1)}>+</button>
         </div>
       )
       const total=cartItem.quantity*product.price;
-      subTotal+=total;
       return(
         <div className="cart-item" key={cartItem.id}>
           <img src={getImage(product.image_file)} alt="" />
@@ -66,39 +145,7 @@ export default function CartPage(){
         )
         return entry?entry[1]:undefined;
       }
-    })
-    async function placeOrder(){
-      setCart({items: []});
-      navigate('/order-placed')
-      const { error } = await supabase
-      .from('User Carts')
-      .update({ cart_items: {items:[]} })
-      .eq('user_id', user.user_id)
-      .select()
-      if(error) console.log(error);
     }
-    if(cart.items.length>0) return(
-      <div className='cart-summary'>
-        <div className="cart-items">
-          <div className="heading">
-            <h3 className="product">Product</h3>
-            <h3 className="quantity">Quantity</h3>
-            <h3 className="price">Price</h3>
-            <h3 className="total">Total</h3>
-          </div>
-          {itemCards}
-          </div>
-        <div className="order-summary">
-          <div className='totals'>
-            <div className="subtotal"><p>Subtotal</p><p>&#8377;{' '}{new Intl.NumberFormat('en-IN').format(subTotal)}</p></div>
-            <div className="shipping-charge"><p>Shipping Charges</p><p>&#8377;{' '}{new Intl.NumberFormat('en-IN').format(100)}</p></div>
-            <hr />
-            <div className="total"><p>Total</p><p>&#8377;{' '}{new Intl.NumberFormat('en-IN').format(subTotal+100)}</p></div>
-          </div>
-          <button className="place-order" onClick={placeOrder}>Place Order</button>
-        </div>
-      </div>
-    )
 
     return(
       <div className="empty-cart">
@@ -112,5 +159,4 @@ export default function CartPage(){
       </div>
     )
   }
-  
 }

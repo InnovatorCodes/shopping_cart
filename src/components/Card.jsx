@@ -1,8 +1,12 @@
 import { supabase } from "./supabaseClient";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 export default function Card({product, cart, setCart, quantity, images, userID}){
+    const [isEditing, setIsEditing]= useState(false);
+    const [inputQty, setInputQty] = useState(quantity);
+
     const navigate=useNavigate();
     async function updateCart(prodID,qty){
         if(userID){
@@ -37,9 +41,42 @@ export default function Card({product, cart, setCart, quantity, images, userID})
     const imageSrc=getImage(product.image_file);
     const quantityCounter= (
         <div className="quantity">
-            <button className="decrement" onClick={()=>updateCart(product.id,quantity-1)}>-</button>
-            <div className="quantity-count">{quantity}</div>
-            <button className="increment" onClick={()=>updateCart(product.id,quantity+1)}>+</button>
+            <button className="decrement" onClick={()=>{
+                setInputQty(quantity-1)
+                updateCart(product.id,quantity-1)
+            }}>-</button>
+            {
+              isEditing ? (
+                <input
+                  className="quantity-count"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={inputQty }
+                  onChange={(event) => {
+                    const value=event.target.value;
+                    if (/^\d*$/.test(value)) {
+                      setInputQty(value);
+                    }
+                  }}
+                  onBlur={() => {
+                    const finalQty = parseInt(inputQty);
+                    updateCart(product.id, isNaN(finalQty) || finalQty < 1 ? 1 : finalQty);
+                    setIsEditing(false);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.target.blur(); // triggers onBlur
+                    }
+                  }}
+                  autoFocus
+                />
+              ) : ( <div className="quantity-count" onClick={() => setIsEditing(true)}>{quantity}</div> )
+            }
+            <button className="increment" onClick={()=>{
+                setInputQty(quantity+1)
+                updateCart(product.id,quantity+1)
+            }}>+</button>
         </div>
     )
     return(
