@@ -14,7 +14,7 @@ export default function CartPage(){
     }
   }, [user, navigate]);
   CartSummary.propTypes={
-    cart: PropTypes.object.isRequired,
+    cart: PropTypes.array.isRequired,
     products: PropTypes.object.isRequired,
     images: PropTypes.object.isRequired
   }
@@ -121,6 +121,7 @@ export default function CartPage(){
           <div className="total">&#8377;{' '}{new Intl.NumberFormat('en-IN').format(total)}</div>
         </div>
       )
+
       async function updateCart(prodID,qty){
         let newCart= {...cart};
           const prodIndex = newCart.items.findIndex((p) => p.id === prodID);
@@ -145,6 +146,10 @@ export default function CartPage(){
         )
         return entry?entry[1]:undefined;
       }
+    }
+
+    CartItem.propTypes={
+      cartItem:PropTypes.object.isRequired,
     }
 
     return(

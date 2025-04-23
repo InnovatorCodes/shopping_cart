@@ -80,7 +80,7 @@ export default function Card({product, cart, setCart, quantity, images, userID})
         </div>
     )
     return(
-        <div className="product-card">
+        <div className="product-card" data-testid="card">
             <div className="image-container">{imageSrc && <img src={imageSrc} alt={product.name} />}</div>
             <div className="text">
             <h3>{product.name}</h3>
@@ -103,7 +103,7 @@ export default function Card({product, cart, setCart, quantity, images, userID})
 }
 
 Card.propTypes={
-    products: PropTypes.object.isRequired,
+    products: PropTypes.array.isRequired,
     cart: PropTypes.object.isRequired,
     quantity: PropTypes.number.isRequired,
     images: PropTypes.object.isRequired,

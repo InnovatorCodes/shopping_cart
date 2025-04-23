@@ -19,7 +19,7 @@ export default function Categories({setFilter}){
       setFilter(filters[index]);
       navigate('/shop');
     }}>
-      <div className="image-container"><img src={bgImages[index]} alt="" /></div>
+      <div className="image-container"><img src={bgImages[index]} alt="Category" /></div>
       <div className="title"><p>{category}</p></div>
     </div>
   )

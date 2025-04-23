@@ -44,9 +44,9 @@ export default function Slider({setFilter}){
     <>
       <h2>Best Deals</h2>
       <div className='slider-window'>
-        <div className="slider" style={{transform: `translateX(-${slideNumber%totalSlides*100}%)`}}>{slides}</div>
-        <button className="right-btn" onClick={()=>setSlideNumber((slideNum)=>(slideNum+1)%totalSlides)}><img src={slideRight} alt="" /></button>
-        <button className="left-btn" onClick={()=>setSlideNumber((slideNum)=>(slideNum-1+totalSlides)%totalSlides)}><img src={slideLeft} alt="" /></button>
+        <div className="slider" style={{transform: `translateX(-${slideNumber%totalSlides*100}%)`}} data-testid='slider-container' >{slides}</div>
+        <button className="right-btn" onClick={()=>setSlideNumber((slideNum)=>(slideNum+1)%totalSlides)}><img src={slideRight} alt="Next Slide" /></button>
+        <button className="left-btn" onClick={()=>setSlideNumber((slideNum)=>(slideNum-1+totalSlides)%totalSlides)}><img src={slideLeft} alt="Previous Slide" /></button>
       </div>
     </>
   )

@@ -45,7 +45,7 @@ export default function ProductCards({products, cart, setCart, images, userID,fi
 }
 
 ProductCards.propTypes={
-  products: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
   cart: PropTypes.object.isRequired,
   images: PropTypes.object.isRequired,
   userID: PropTypes.number.isRequired,
