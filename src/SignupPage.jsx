@@ -3,7 +3,7 @@ import { supabase } from "./components/supabaseClient";
 import { useNavigate, useOutletContext,Link } from "react-router-dom";
 
 export default function SignupPage(){
-  const {setUser} = useOutletContext
+  const {setUser} = useOutletContext();
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const [confPassword,setConfPassword]=useState("");
@@ -42,7 +42,6 @@ export default function SignupPage(){
         password: password,
         full_name: fullName
       }
-      console.log(count,newUser)
       await addUser(newUser);
     }
 
@@ -60,12 +59,18 @@ export default function SignupPage(){
         newUser,
       ])
       .select()
-      if(error.message.substring(0,13)=='duplicate key'){
+      if(error && error.message.substring(0,13)=='duplicate key'){
         setAlert('An account with this email already exists')
       }
       else if(error) console.log(error)
       else {
-        console.log('hi')
+        const { error } = await supabase
+        .from('User Carts')
+        .insert([
+          {user_id: newUser.user_id, cart_items: {"items": []}},
+        ])
+        .select()
+        if(error) console.log(error)
         setUser({user_id: newUser.user_id, full_name: newUser.full_name})
         navigate('/');
       }
