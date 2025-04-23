@@ -16,8 +16,9 @@ export default function OrderPlacedPage(){
       {orderSuccess}
       <h2>Order Placed Successfully</h2>
       <div>
-        <p>Your order has been successfully placed! Your Order ID is #{orderID}.</p>
-        <p>We’ve received your order and it will be processed shortly. Your items are expected to be delivered within 3–4 business days.</p>
+        <p>Your Order ID is #{orderID}.</p>
+        <p>We’ve received your order and it will be processed shortly.</p>
+        <p>Your items are expected to be delivered within 3–4 business days.</p>
         <p>Just Kidding. Thanks for Checking out my Website though.</p>
       </div>
       <button className="continue-shopping" onClick={()=>navigate('/shop')}>Continue Shopping</button>
