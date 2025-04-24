@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ProductCards from "../ProductCards";
-import { describe, it, expect, vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
+import { describe, it, expect, vi } from "vitest";
+import { MemoryRouter } from "react-router-dom";
 
 vi.mock("./Card", () => ({
   default: vi.fn(() => <div data-testid="card"></div>),
@@ -20,31 +20,33 @@ describe("ProductCards", () => {
   it("renders loader when no products are available", () => {
     render(
       <MemoryRouter>
-          <ProductCards
-            products={[]}
-            cart={mockCart}
-            setCart={mockSetCart}
-            images={mockImages}
-            userID={123}
-            filter="ALL"
-          />
-      </MemoryRouter>
+        <ProductCards
+          products={[]}
+          cart={mockCart}
+          setCart={mockSetCart}
+          images={mockImages}
+          userID={123}
+          filter="ALL"
+        />
+      </MemoryRouter>,
     );
-    expect(screen.getByText((_, el) => el?.classList.contains("loader"))).toBeInTheDocument();
+    expect(
+      screen.getByText((_, el) => el?.classList.contains("loader")),
+    ).toBeInTheDocument();
   });
 
   it("renders all cards if filter is ALL", () => {
     render(
       <MemoryRouter>
-          <ProductCards
-            products={mockProducts}
-            cart={mockCart}
-            setCart={mockSetCart}
-            images={mockImages}
-            userID={123}
-            filter="ALL"
-          />
-      </MemoryRouter>
+        <ProductCards
+          products={mockProducts}
+          cart={mockCart}
+          setCart={mockSetCart}
+          images={mockImages}
+          userID={123}
+          filter="ALL"
+        />
+      </MemoryRouter>,
     );
     expect(screen.getAllByTestId("card")).toHaveLength(mockProducts.length);
   });
@@ -52,15 +54,15 @@ describe("ProductCards", () => {
   it("filters products by category AW", () => {
     render(
       <MemoryRouter>
-          <ProductCards
-            products={mockProducts}
-            cart={mockCart}
-            setCart={mockSetCart}
-            images={mockImages}
-            userID={123}
-            filter="AW"
-          />
-      </MemoryRouter>
+        <ProductCards
+          products={mockProducts}
+          cart={mockCart}
+          setCart={mockSetCart}
+          images={mockImages}
+          userID={123}
+          filter="AW"
+        />
+      </MemoryRouter>,
     );
     expect(screen.getAllByTestId("card")).toHaveLength(1);
   });
@@ -68,15 +70,15 @@ describe("ProductCards", () => {
   it("filters products by category CA", () => {
     render(
       <MemoryRouter>
-          <ProductCards
-            products={mockProducts}
-            cart={mockCart}
-            setCart={mockSetCart}
-            images={mockImages}
-            userID={123}
-            filter="CA"
-          />
-      </MemoryRouter>
+        <ProductCards
+          products={mockProducts}
+          cart={mockCart}
+          setCart={mockSetCart}
+          images={mockImages}
+          userID={123}
+          filter="CA"
+        />
+      </MemoryRouter>,
     );
     expect(screen.getAllByTestId("card")).toHaveLength(1);
   });
@@ -84,15 +86,15 @@ describe("ProductCards", () => {
   it("filters products by category GVR", () => {
     render(
       <MemoryRouter>
-          <ProductCards
-            products={mockProducts}
-            cart={mockCart}
-            setCart={mockSetCart}
-            images={mockImages}
-            userID={123}
-            filter="GVR"
-          />
-      </MemoryRouter>
+        <ProductCards
+          products={mockProducts}
+          cart={mockCart}
+          setCart={mockSetCart}
+          images={mockImages}
+          userID={123}
+          filter="GVR"
+        />
+      </MemoryRouter>,
     );
     expect(screen.getAllByTestId("card")).toHaveLength(1);
   });

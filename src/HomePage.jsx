@@ -1,9 +1,9 @@
-import Header from "./components/Header"
-import Slider from "./components/Slider"
-import Categories from "./components/Categories"
-import { useOutletContext } from 'react-router-dom';
+import Header from "./components/Header";
+import Slider from "./components/Slider";
+import Categories from "./components/Categories";
+import { useOutletContext } from "react-router-dom";
 
-export default function HomePage(){
+export default function HomePage() {
   const { user, setUser, setFilter } = useOutletContext();
   return (
     <>
@@ -11,5 +11,5 @@ export default function HomePage(){
       <Slider setFilter={setFilter}></Slider>
       <Categories setFilter={setFilter}></Categories>
     </>
-  )
+  );
 }

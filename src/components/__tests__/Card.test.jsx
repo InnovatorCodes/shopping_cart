@@ -1,5 +1,5 @@
 // Card.test.jsx
-import { describe, it, expect, vi } from 'vitest'; // ✅ replace jest with vi
+import { describe, it, expect, vi } from "vitest"; // ✅ replace jest with vi
 import { render, screen, fireEvent } from "@testing-library/react";
 import Card from "../Card";
 import { BrowserRouter } from "react-router-dom";
@@ -28,7 +28,7 @@ const setup = (props = {}) => {
   return render(
     <BrowserRouter>
       <Card {...defaultProps} />
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 };
 

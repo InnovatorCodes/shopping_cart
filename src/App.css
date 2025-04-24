@@ -2,24 +2,25 @@
   font-family: simplifica;
   src: url(./assets/fonts/simplifica.ttf);
 }
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-a, a:hover{
+a,
+a:hover {
   text-decoration: none;
   color: inherit;
 }
-span{
+span {
   text-decoration: underline;
-  color: #24A0ED;
+  color: #24a0ed;
 }
-html{
+html {
   height: 100%;
   font-family: sans-serif;
 }
-body{
+body {
   padding: 1rem;
   height: 100%;
 }
@@ -34,11 +35,11 @@ body{
   position: relative;
 }
 
-#root>h2{
+#root > h2 {
   align-self: flex-start;
 }
 
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,63 +47,63 @@ body{
   margin-bottom: 1rem;
   gap: 1rem;
 }
-.links{
+.links {
   display: flex;
   gap: 1rem;
   text-transform: uppercase;
 }
-.link{
+.link {
   position: relative;
   font-size: 1.3rem;
   cursor: pointer;
 }
 .link::before,
-.link::after{
-  content: '';
+.link::after {
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
   background: #262626;
-  transition: .5s;
+  transition: 0.5s;
   opacity: 0;
 }
-.link::before{
+.link::before {
   top: 0;
   left: 0;
 }
-.link::after{
+.link::after {
   bottom: 0;
   right: 0;
 }
 .link:hover::before,
-.link:hover::after{
+.link:hover::after {
   opacity: 1;
   width: 100%;
-  transition: .5s;
+  transition: 0.5s;
 }
 .link.active::before,
-.link.active::after{
+.link.active::after {
   width: 100%;
   opacity: 1;
 }
-.header h1{
+.header h1 {
   font-family: simplifica;
   font-weight: 600;
   font-size: 5rem;
   line-height: 5rem;
 }
-.buttons{
+.buttons {
   display: flex;
   gap: 1rem;
 }
-button.cart{
+button.cart {
   transition: transform 0.3s ease-in-out;
   will-change: contents;
 }
-button.cart:hover{
+button.cart:hover {
   transform: scale(1.1);
 }
-.login-btn{
+.login-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -115,11 +116,11 @@ button.cart:hover{
   overflow: hidden;
   color: black;
 }
-.login-btn:hover{
+.login-btn:hover {
   color: white;
 }
-.login-btn::after{
-  content: '';
+.login-btn::after {
+  content: "";
   z-index: -1;
   background-color: black;
   position: absolute;
@@ -130,14 +131,14 @@ button.cart:hover{
   transform: translateY(101%);
   transition: 0.3s;
 }
-.login-btn:hover::after{
+.login-btn:hover::after {
   transform: translateY(0);
 }
-.user{
+.user {
   position: relative;
   cursor: pointer;
 }
-.profile-dropdown{
+.profile-dropdown {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -149,38 +150,38 @@ button.cart:hover{
   width: max-content;
   align-items: center;
 }
-.profile-dropdown h3{
+.profile-dropdown h3 {
   margin-bottom: 1rem;
 }
-.user:hover .profile-dropdown{
+.user:hover .profile-dropdown {
   display: flex;
   background-color: white;
   border: 1px solid black;
   flex-direction: column;
   transform: translateY(100%);
 }
-.logout-btn{
+.logout-btn {
   display: flex;
   align-self: center;
   align-items: center;
   gap: 0.5rem;
   font-size: 1.2rem;
-  border: 1px solid #ED1C24;
+  border: 1px solid #ed1c24;
   padding: 0.3rem;
   padding-right: 0.5rem;
   background: none;
   position: relative;
   overflow: hidden;
-  color: #ED1C24;
+  color: #ed1c24;
 }
-.logout-btn:hover{
+.logout-btn:hover {
   color: white;
-  border: 1px solid #ED1C24;
+  border: 1px solid #ed1c24;
 }
-.logout-btn::after{
-  content: '';
+.logout-btn::after {
+  content: "";
   z-index: -1;
-  background-color: #ED1C24;
+  background-color: #ed1c24;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -189,13 +190,13 @@ button.cart:hover{
   transform: translateY(101%);
   transition: 0.3s;
 }
-.logout-btn:hover::after{
+.logout-btn:hover::after {
   transform: translateY(0);
 }
-.buttons img{
+.buttons img {
   width: 2.5rem;
 }
-.slider-window{
+.slider-window {
   border: 1px solid black;
   border-radius: 1rem;
   overflow: hidden;
@@ -205,14 +206,14 @@ button.cart:hover{
   min-height: max-content;
   margin-bottom: 2rem;
 }
-.slider{
+.slider {
   width: 100%;
   height: 100%;
   display: flex;
   animation: slideIn 0.4s ease-in-out;
   transition: transform 0.4s ease-in-out;
 }
-.slide{
+.slide {
   flex: 0 0 100%;
   display: flex;
   align-items: center;
@@ -223,47 +224,47 @@ button.cart:hover{
   overflow: hidden;
 }
 @keyframes slideIn {
-  0%{
+  0% {
     transform: translateX(100%);
   }
-  100%{
+  100% {
     transform: translateX(0);
   }
 }
-.slide>*{
+.slide > * {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-.slide .image-container{
+.slide .image-container {
   position: relative;
   overflow: hidden;
   width: 55%;
   height: 100%;
 }
-.slide img{
+.slide img {
   position: absolute;
   height: 100%;
   top: 0;
   max-height: 100%;
   width: 100%;
   object-fit: cover;
-  min-width: clamp(800px,50%,1100px);
-  cursor:pointer;
+  min-width: clamp(800px, 50%, 1100px);
+  cursor: pointer;
 }
-.slide .text{
+.slide .text {
   flex: 1 1 100%;
   min-width: 200px;
   max-width: 50%;
   min-height: max-content;
   padding: 3rem;
 }
-.text p{
+.text p {
   align-self: center;
   margin-bottom: 1.3rem;
 }
-.text button{
+.text button {
   border: 1px solid black;
   padding: 0.5rem 1rem;
   align-self: center;
@@ -274,14 +275,14 @@ button.cart:hover{
   transition: all 0.3s ease-in-out;
   will-change: contents;
 }
-.text button:hover{
+.text button:hover {
   transform: translateX(-8px) translateY(-8px);
   box-shadow: 10px 10px 0 black;
 }
-.text button>p{
+.text button > p {
   height: min-content;
 }
-.slider-window>button{
+.slider-window > button {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -293,30 +294,30 @@ button.cart:hover{
   padding: 0.6rem 0.2rem;
   transition: background-color 0.18s ease-in-out;
 }
-.slider-window>button:hover{
+.slider-window > button:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
-.slider-window button img{
+.slider-window button img {
   width: 2rem;
 }
-.right-btn{
+.right-btn {
   right: 0;
 }
-.left-btn{
+.left-btn {
   left: 0;
 }
-.categories{
+.categories {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
-.category{
+.category {
   aspect-ratio: 1 / 1;
   width: max(20vh, 120px);
   display: flex;
   flex-direction: column;
-  min-width: 200px; 
+  min-width: 200px;
   border-radius: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.6);
   overflow: hidden;
@@ -327,32 +328,32 @@ button.cart:hover{
   will-change: contents;
 }
 .category::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
   background: linear-gradient(
-    0deg, 
-    transparent, 
-    transparent 30%, 
-    rgba(255,255,255,0.3)
+    0deg,
+    transparent,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3)
   );
   transform: rotate(-45deg);
   transition: all 0.5s ease;
   opacity: 0;
 }
-.category:hover::before{
+.category:hover::before {
   opacity: 1;
   transform: rotate(-45deg) translateY(100%);
   z-index: 2;
 }
-.category img{
+.category img {
   height: 100%;
   object-fit: cover;
 }
-.category .title{
+.category .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -366,38 +367,38 @@ button.cart:hover{
   background-color: rgba(0, 0, 0, 0.2);
   min-height: 30%;
 }
-.category:hover{
+.category:hover {
   transform: scale(1.1);
   cursor: pointer;
   box-shadow: 0 0 10px black;
 }
-.category p{
+.category p {
   color: white;
 }
-.category .image-container{
+.category .image-container {
   height: 100%;
   width: 100%;
   position: relative;
   object-fit: cover;
 }
-.shop-categories{
+.shop-categories {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 1rem;
 }
-.shop-categories>button{
+.shop-categories > button {
   background-color: rgb(224, 224, 224);
   padding: 1rem;
 }
-.shop-categories>button.selected{
+.shop-categories > button.selected {
   background-color: white;
   border: 1px solid black;
 }
-.products{
+.products {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(380px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 1rem;
   padding-bottom: 1rem;
   justify-content: center;
@@ -405,15 +406,15 @@ button.cart:hover{
 .loader {
   width: 48px;
   height: 48px;
-  border: 3px solid #FFF;
+  border: 3px solid #fff;
   border-radius: 50%;
   display: inline-block;
   position: relative;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-} 
+}
 .loader::after {
-  content: '';  
+  content: "";
   box-sizing: border-box;
   position: absolute;
   left: 50%;
@@ -423,7 +424,7 @@ button.cart:hover{
   height: 56px;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-bottom-color: #FF3D00;
+  border-bottom-color: #ff3d00;
 }
 @keyframes rotation {
   0% {
@@ -432,8 +433,8 @@ button.cart:hover{
   100% {
     transform: rotate(360deg);
   }
-} 
-.product-card{
+}
+.product-card {
   font-family: "Raleway", serif;
   font-optical-sizing: auto;
   font-weight: 300;
@@ -447,53 +448,53 @@ button.cart:hover{
   padding: 2rem;
   width: 100%;
 }
-.product-card .image-container{
+.product-card .image-container {
   width: 100%;
   height: 100%;
   aspect-ratio: 1/1;
   overflow: hidden;
 }
-.product-card img{
+.product-card img {
   height: 80%;
   object-position: center;
 }
-.product-card .text{
+.product-card .text {
   display: flex;
   gap: 2rem;
   justify-content: space-between;
 }
-.product-card h3{
+.product-card h3 {
   text-align: left;
   font-size: 1.3rem;
   max-width: 60%;
 }
-.product-card .price{
+.product-card .price {
   font-size: 2rem;
   min-width: max-content;
 }
-.product-info{
+.product-info {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: flex-end;
   min-width: max-content;
 }
-.product-info button{
-  background-color: #24A0ED;
+.product-info button {
+  background-color: #24a0ed;
   border: none;
   color: white;
   will-change: contents;
   align-self: flex-end;
   height: 2.5rem;
 }
-.product-info button:hover{
+.product-info button:hover {
   transform: none;
   box-shadow: none;
 }
-.product-info>button:hover{
+.product-info > button:hover {
   transform: scale(1.1);
 }
-.quantity{
+.quantity {
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -502,7 +503,7 @@ button.cart:hover{
   font-weight: 600;
   height: 2.5rem;
 }
-input.quantity-count{
+input.quantity-count {
   background-color: white;
   color: black;
   width: min-content;
@@ -511,16 +512,16 @@ input.quantity-count{
   padding: 0.25rem 0.6rem;
   border-radius: 0.5rem;
 }
-input.quantity-count:focus{
+input.quantity-count:focus {
   outline: none;
 }
-.quantity button{
+.quantity button {
   font-family: sans-serif;
   background: none;
   color: black;
   font-size: 1.3rem;
 }
-.login{
+.login {
   margin: auto;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -533,10 +534,10 @@ input.quantity-count:focus{
   box-shadow: 0 0 4px black;
   font-family: "Raleway";
 }
-.login>div{
+.login > div {
   position: relative;
 }
-.login label{
+.login label {
   position: absolute;
   top: 50%;
   color: black;
@@ -549,7 +550,7 @@ input.quantity-count:focus{
   transition: all 0.3s ease-in-out;
   will-change: contents;
 }
-.login input{
+.login input {
   background: white;
   border: 1px solid black;
   border-radius: 0.3rem;
@@ -561,30 +562,30 @@ input.quantity-count:focus{
   padding-right: 3rem;
 }
 .login input:focus + label,
-.login input:not(:placeholder-shown)+ label{
+.login input:not(:placeholder-shown) + label {
   top: 0;
   transform: translateY(-50%) scale(0.9);
   background-color: white;
 }
-.login input:focus-visible{
+.login input:focus-visible {
   outline: none;
 }
-.login input.touched:invalid{
-  border:1px solid red;
+.login input.touched:invalid {
+  border: 1px solid red;
 }
-.login button{
-  background-color: #24A0ED;
+.login button {
+  background-color: #24a0ed;
   color: white;
   padding: 1rem;
 }
-.login h2{
+.login h2 {
   margin-bottom: 1rem;
 }
-.login .alert{
+.login .alert {
   align-self: flex-start;
   color: red;
 }
-.login h1{
+.login h1 {
   position: absolute;
   top: 0;
   left: 1rem;
@@ -595,7 +596,7 @@ input.quantity-count:focus{
   line-height: 5rem;
 }
 .password svg,
-.conf-password svg{
+.conf-password svg {
   position: absolute;
   right: 0.5rem;
   top: 50%;
@@ -604,10 +605,11 @@ input.quantity-count:focus{
   background-color: white;
   width: min-content;
 }
-.show-password:hover,.show-conf-password:hover{
+.show-password:hover,
+.show-conf-password:hover {
   cursor: pointer;
 }
-.cart-page{
+.cart-page {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -615,13 +617,13 @@ input.quantity-count:focus{
   padding: 1rem 0;
   font-family: "Raleway";
 }
-.cart-summary{
+.cart-summary {
   display: flex;
   align-self: stretch;
   justify-content: space-between;
   gap: 2rem;
 }
-.cart-items{
+.cart-items {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   background-color: #eeeeee;
@@ -631,7 +633,7 @@ input.quantity-count:focus{
   flex: 1 1 50%;
   min-width: 700px;
 }
-.cart-item{
+.cart-item {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1 / span 5;
@@ -643,30 +645,33 @@ input.quantity-count:focus{
   border-radius: 1rem;
   padding: 0.5rem 0;
 }
-.cart-item .price, .cart-item .total,.subtotal, .shipping-charge{
+.cart-item .price,
+.cart-item .total,
+.subtotal,
+.shipping-charge {
   font-size: 1.5rem;
 }
-.cart-items .heading{
+.cart-items .heading {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1 / span 5;
   align-items: center;
 }
-.cart-items .product{
+.cart-items .product {
   grid-column: 1 / span 2;
 }
-.cart-items>.heading>.quantity{
+.cart-items > .heading > .quantity {
   border: none;
   display: block;
 }
-.cart-item .quantity{
+.cart-item .quantity {
   padding: 0 0.5rem;
   gap: 1rem;
 }
-.cart-item img{
+.cart-item img {
   width: 90%;
 }
-.order-summary{
+.order-summary {
   display: flex;
   flex-direction: column;
   flex: 1 1 25%;
@@ -676,62 +681,62 @@ input.quantity-count:focus{
   font-size: 1.2rem;
   height: min-content;
 }
-.order-summary div{
+.order-summary div {
   display: flex;
   justify-content: space-between;
 }
-.order-summary .total{
+.order-summary .total {
   font-size: 1.4rem;
   font-weight: 600;
 }
-.totals{
+.totals {
   display: flex;
   flex-direction: column;
-  background-color:#eeeeee;
+  background-color: #eeeeee;
   padding: 1rem;
   gap: 1rem;
   border-radius: 1rem;
   min-width: 370px;
 }
-button.place-order{
-  background-color: #24A0ED;
+button.place-order {
+  background-color: #24a0ed;
   color: white;
   padding: 1rem 0;
   position: relative;
   overflow: hidden;
   z-index: 0;
 }
-button.place-order::after{
-  content: '';
+button.place-order::after {
+  content: "";
   width: 100%;
   height: 100%;
   position: absolute;
   left: -100%;
-  top:0;
+  top: 0;
   background-color: #1c8ed4;
   transition: all 0.7s ease-in-out;
   z-index: -1;
 }
-button.place-order:hover::after{
+button.place-order:hover::after {
   left: 0;
 }
-.empty-cart{
+.empty-cart {
   display: flex;
   flex-direction: column;
   align-items: center;
   align-self: stretch;
   gap: 1rem;
 }
-.empty-cart img{
+.empty-cart img {
   width: max(300px, 15vw);
 }
-.empty-cart button{
-  background-color: #24A0ED;
+.empty-cart button {
+  background-color: #24a0ed;
   color: white;
   padding: 1rem 2rem;
   border-radius: 0.6rem;
 }
-.order-placed{
+.order-placed {
   font-family: "Raleway";
   font-size: 1.2rem;
   display: flex;
@@ -740,11 +745,11 @@ button.place-order:hover::after{
   gap: 1rem;
   height: 100%;
 }
-.order-placed svg{
+.order-placed svg {
   width: 200px;
 }
-button.continue-shopping{
-  background-color: #24A0ED;
+button.continue-shopping {
+  background-color: #24a0ed;
   width: max-content;
   padding: 1rem;
   color: white;
