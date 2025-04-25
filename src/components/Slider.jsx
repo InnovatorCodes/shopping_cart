@@ -3,12 +3,13 @@ import watchesImg from "../assets/smartwatches.png";
 import audioImg from "../assets/audio.png";
 import slideRight from "../assets/slideRight.svg";
 import slideLeft from "../assets/slideLeft.svg";
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export default function Slider({ setFilter }) {
   const [slideNumber, setSlideNumber] = useState(0);
+  const timerRef = useRef(null);
   const navigate = useNavigate();
   const slideContents = [
     {
@@ -50,13 +51,21 @@ export default function Slider({ setFilter }) {
     );
   });
 
-  /*useEffect(() => {
-    const timer = setInterval(
-      () => setSlideNumber((slideNum) => (slideNum + 1) % totalSlides),
-      5000,
-    );
-    return () => clearInterval(timer);
-  }, [totalSlides]);*/
+  const startTimer = useCallback(() => {
+    timerRef.current = setInterval(() => {
+      setSlideNumber((prev) => (prev + 1) % totalSlides);
+    }, 5000);
+  }, [totalSlides]);
+
+  const resetTimer = useCallback(() => {
+    clearInterval(timerRef.current);
+    startTimer();
+  }, [startTimer]);
+
+  useEffect(() => {
+    startTimer();
+    return () => clearInterval(timerRef.current);
+  }, [startTimer]);
 
   return (
     <>
@@ -73,22 +82,41 @@ export default function Slider({ setFilter }) {
         </div>
         <button
           className="right-btn"
-          onClick={() =>
-            setSlideNumber((slideNum) => (slideNum + 1) % totalSlides)
-          }
+          onClick={() =>{
+            setSlideNumber((slideNum) => (slideNum + 1) % totalSlides);
+            resetTimer();
+          }}
         >
           <img src={slideRight} alt="Next Slide" />
         </button>
         <button
           className="left-btn"
-          onClick={() =>
+          onClick={() =>{
             setSlideNumber(
               (slideNum) => (slideNum - 1 + totalSlides) % totalSlides,
             )
-          }
+            resetTimer();
+          }}
         >
           <img src={slideLeft} alt="Previous Slide" />
         </button>
+        <div className="progress">
+          <div className={`dot ${slideNumber==0? "active": ""}`} 
+          onClick={()=>{
+            setSlideNumber(0);
+            resetTimer();
+          }}></div>
+          <div className={`dot ${slideNumber==1? "active": ""}`} 
+          onClick={()=>{
+            setSlideNumber(1);
+            resetTimer();
+          }}></div>
+          <div className={`dot ${slideNumber==2? "active": ""}`} 
+          onClick={()=>{
+            setSlideNumber(2);
+            resetTimer();
+          }}></div>
+        </div>
       </div>
     </>
   );

@@ -212,6 +212,30 @@ button.cart:hover {
   min-height: max-content;
   margin-bottom: 2rem;
 }
+.progress{
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+.dot.active {
+  background-color: white;
+  border: none;
+}
 .slider {
   width: 100%;
   height: 100%;
