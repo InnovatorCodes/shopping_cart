@@ -23,13 +23,12 @@ html {
   font-family: sans-serif;
 }
 body {
-  padding: 1rem;
   height: 100%;
   min-height: max-content;
 }
 #root {
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
   text-align: center;
   height: 100%;
   display: flex;
@@ -786,6 +785,21 @@ button.continue-shopping {
   width: max-content;
   padding: 1rem;
   color: white;
+}
+.footer a{
+  position: relative;
+  bottom: 0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  color: white;
+  font-family: "Raleway";
+  gap: 1rem;
+  align-items: center;
+}
+.footer img{
+  width: 2rem;
 }
 
 @media screen and (max-width: 770px) {
