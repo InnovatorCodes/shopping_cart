@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 a,
 a:hover {
@@ -23,6 +25,7 @@ html {
 body {
   padding: 1rem;
   height: 100%;
+  min-height: max-content;
 }
 #root {
   margin: 0 auto;
@@ -33,10 +36,13 @@ body {
   flex-direction: column;
   justify-content: start;
   position: relative;
+  min-height: max-content;
 }
 
 #root > h2 {
   align-self: flex-start;
+  margin-bottom: 15px;
+  font-family: "Raleway";
 }
 
 .header {
@@ -398,7 +404,7 @@ button.cart:hover {
 }
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 1rem;
   padding-bottom: 1rem;
   justify-content: center;
@@ -645,6 +651,11 @@ input.quantity-count:focus {
   border-radius: 1rem;
   padding: 0.5rem 0;
 }
+.cart-item .fixed {
+  display: grid;
+  grid-column: 2 / span;
+  grid-template-columns: subgrid;
+}
 .cart-item .price,
 .cart-item .total,
 .subtotal,
@@ -753,4 +764,115 @@ button.continue-shopping {
   width: max-content;
   padding: 1rem;
   color: white;
+}
+
+@media screen and (max-width: 770px) {
+  html {
+    min-height: 100vh;
+  }
+  body {
+    min-height: 100vh;
+    background-size: cover;
+  }
+  .header h1 {
+    font-size: max(50px, 10vw);
+  }
+  .links {
+    gap: 0.5rem;
+  }
+  .link {
+    font-size: clamp(15px, 4vw, 1.3rem);
+  }
+  .buttons img {
+    width: clamp(30px, 7vw, 2.5rem);
+  }
+  .login-btn {
+    font-size: min(4vw, 1.2rem);
+  }
+  .slider-window > button:hover {
+    background: none;
+  }
+  .slide {
+    flex-direction: column-reverse;
+    padding: 0;
+    gap: 0;
+    height: 100%;
+    overflow: visible;
+    position: relative;
+    justify-content: center;
+  }
+  .slide .text,
+  .slide .image-container {
+    width: 100%;
+    max-width: none;
+    max-height: 100%;
+    height: 100%;
+    flex: 1 1 0;
+  }
+  .slide .image-container {
+    position: absolute;
+    z-index: -1;
+  }
+  .slide .text {
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+  }
+  .products {
+    width: 70vw;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  }
+  .product-card .image-container {
+    width: 80%;
+    align-self: center;
+  }
+  .product-card .price {
+    font-size: min(7vw, 30px);
+  }
+  .product-card h3 {
+    font-size: min(5.5vw, 25px);
+  }
+  .cart-summary {
+    flex-direction: column;
+  }
+  .cart-summary .heading {
+    display: none;
+  }
+  .cart-items {
+    min-width: unset;
+  }
+  .cart-item .fixed {
+    display: flex;
+    align-self: stretch;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .fixed > * {
+    flex: 1;
+  }
+  .cart-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-item img {
+    width: 50vw;
+  }
+  .totals {
+    width: 100%;
+    min-width: unset;
+  }
+  .subtotal,
+  .shipping-charge {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+  .login {
+    width: 100%;
+    padding: 5%;
+    gap: 0.8rem;
+  }
+  .login h2 {
+    margin-bottom: 2vw;
+  }
 }

@@ -3,7 +3,7 @@ import watchesImg from "../assets/smartwatches.png";
 import audioImg from "../assets/audio.png";
 import slideRight from "../assets/slideRight.svg";
 import slideLeft from "../assets/slideLeft.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -50,13 +50,13 @@ export default function Slider({ setFilter }) {
     );
   });
 
-  useEffect(() => {
+  /*useEffect(() => {
     const timer = setInterval(
       () => setSlideNumber((slideNum) => (slideNum + 1) % totalSlides),
       5000,
     );
     return () => clearInterval(timer);
-  }, [totalSlides]);
+  }, [totalSlides]);*/
 
   return (
     <>

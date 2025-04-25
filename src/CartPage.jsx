@@ -49,8 +49,8 @@ export default function CartPage() {
           <div className="cart-items">
             <div className="heading">
               <h3 className="product">Product</h3>
-              <h3 className="quantity">Quantity</h3>
               <h3 className="price">Price</h3>
+              <h3 className="quantity">Quantity</h3>
               <h3 className="total">Total</h3>
             </div>
             {itemCards}
@@ -144,11 +144,13 @@ export default function CartPage() {
       return (
         <div className="cart-item" key={cartItem.id}>
           <img src={getImage(product.image_file)} alt="" />
-          <h3>{product.name}</h3>
-          {quantityCounter}
-          <div className="price">
-            &#8377; {new Intl.NumberFormat("en-IN").format(product.price)}
+          <div className="fixed">
+            <h3>{product.name}</h3>
+            <div className="price">
+              &#8377; {new Intl.NumberFormat("en-IN").format(product.price)}
+            </div>
           </div>
+          {quantityCounter}
           <div className="total">
             &#8377; {new Intl.NumberFormat("en-IN").format(total)}
           </div>
