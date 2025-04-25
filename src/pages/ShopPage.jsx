@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import ProductCards from "./components/ProductCards";
+import Header from "../components/Header";
+import ProductCards from "../components/ProductCards";
 import { useOutletContext } from "react-router-dom";
 
 export default function ShopPage() {

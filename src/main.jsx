@@ -3,12 +3,12 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
-import HomePage from "./HomePage.jsx";
-import ShopPage from "./ShopPage.jsx";
-import CartPage from "./CartPage.jsx";
-import OrderPlacedPage from "./OrderPlacedPage.jsx";
-import SignupPage from "./SignupPage.jsx";
-import Login from "./LoginPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import ShopPage from "./pages/ShopPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
+import OrderPlacedPage from "./pages/OrderPlacedPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
+import Login from "./pages/LoginPage.jsx";
 
 const router = createBrowserRouter([
   {

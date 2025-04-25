@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "./components/supabaseClient";
+import { supabase } from "../components/supabaseClient";
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 export default function Login() {
@@ -105,7 +105,7 @@ export default function Login() {
         <Link to="/">
           <h1>LUNO</h1>
         </Link>
-        <h2>Login Here</h2>
+        <h2>Log In</h2>
         <div className="email">
           <input
             type="email"

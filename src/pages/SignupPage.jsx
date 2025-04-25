@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "./components/supabaseClient";
+import { supabase } from "../components/supabaseClient";
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 export default function SignupPage() {

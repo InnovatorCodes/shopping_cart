@@ -653,7 +653,7 @@ input.quantity-count:focus {
 }
 .cart-item .fixed {
   display: grid;
-  grid-column: 2 / span;
+  grid-column: 2 / span 2;
   grid-template-columns: subgrid;
 }
 .cart-item .price,

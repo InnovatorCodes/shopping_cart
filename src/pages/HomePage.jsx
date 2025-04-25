@@ -1,6 +1,6 @@
-import Header from "./components/Header";
-import Slider from "./components/Slider";
-import Categories from "./components/Categories";
+import Header from "../components/Header";
+import Slider from "../components/Slider";
+import Categories from "../components/Categories";
 import { useOutletContext } from "react-router-dom";
 
 export default function HomePage() {

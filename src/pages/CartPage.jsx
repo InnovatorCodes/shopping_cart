@@ -1,6 +1,6 @@
-import { supabase } from "./components/supabaseClient";
-import emptyCartImg from "./assets/emptyCart.webp";
-import Header from "./components/Header";
+import { supabase } from "../components/supabaseClient";
+import emptyCartImg from "../assets/emptyCart.webp";
+import Header from "../components/Header";
 import PropTypes from "prop-types";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useState, useEffect } from "react";
