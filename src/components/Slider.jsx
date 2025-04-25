@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 
 export default function Slider({ setFilter }) {
   const [slideNumber, setSlideNumber] = useState(0);
+  const [startTouch, setStartTouch] = useState(0);
   const timerRef = useRef(null);
   const navigate = useNavigate();
   const slideContents = [
@@ -67,10 +68,34 @@ export default function Slider({ setFilter }) {
     return () => clearInterval(timerRef.current);
   }, [startTimer]);
 
+  const handleTouchStart = (e) => {
+    const touchStart = e.touches[0].clientX;
+    setStartTouch(touchStart);
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEnd = e.changedTouches[0].clientX;
+    const swipeDistance = startTouch - touchEnd;
+
+    if (swipeDistance > 50) {
+      // Swipe left (next slide)
+      setSlideNumber((prev) => (prev + 1) % totalSlides);
+    } else if (swipeDistance < -50) {
+      // Swipe right (previous slide)
+      setSlideNumber((prev) => (prev - 1 + totalSlides) % totalSlides);
+    }
+
+    resetTimer(); // Restart the timer when swiping
+  };
+
   return (
     <>
       <h2>Best Deals</h2>
-      <div className="slider-window">
+      <div
+        className="slider-window"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
           className="slider"
           style={{
@@ -82,7 +107,7 @@ export default function Slider({ setFilter }) {
         </div>
         <button
           className="right-btn"
-          onClick={() =>{
+          onClick={() => {
             setSlideNumber((slideNum) => (slideNum + 1) % totalSlides);
             resetTimer();
           }}
@@ -91,31 +116,37 @@ export default function Slider({ setFilter }) {
         </button>
         <button
           className="left-btn"
-          onClick={() =>{
+          onClick={() => {
             setSlideNumber(
               (slideNum) => (slideNum - 1 + totalSlides) % totalSlides,
-            )
+            );
             resetTimer();
           }}
         >
           <img src={slideLeft} alt="Previous Slide" />
         </button>
         <div className="progress">
-          <div className={`dot ${slideNumber==0? "active": ""}`} 
-          onClick={()=>{
-            setSlideNumber(0);
-            resetTimer();
-          }}></div>
-          <div className={`dot ${slideNumber==1? "active": ""}`} 
-          onClick={()=>{
-            setSlideNumber(1);
-            resetTimer();
-          }}></div>
-          <div className={`dot ${slideNumber==2? "active": ""}`} 
-          onClick={()=>{
-            setSlideNumber(2);
-            resetTimer();
-          }}></div>
+          <div
+            className={`dot ${slideNumber == 0 ? "active" : ""}`}
+            onClick={() => {
+              setSlideNumber(0);
+              resetTimer();
+            }}
+          ></div>
+          <div
+            className={`dot ${slideNumber == 1 ? "active" : ""}`}
+            onClick={() => {
+              setSlideNumber(1);
+              resetTimer();
+            }}
+          ></div>
+          <div
+            className={`dot ${slideNumber == 2 ? "active" : ""}`}
+            onClick={() => {
+              setSlideNumber(2);
+              resetTimer();
+            }}
+          ></div>
         </div>
       </div>
     </>
