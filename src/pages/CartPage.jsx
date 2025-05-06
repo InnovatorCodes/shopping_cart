@@ -30,12 +30,14 @@ export default function CartPage() {
     async function placeOrder() {
       setCart({ items: [] });
       navigate("/order-placed");
-      const { error } = await supabase
-        .from("User Carts")
-        .update({ cart_items: { items: [] } })
-        .eq("user_id", user.user_id)
-        .select();
-      if (error) console.log(error);
+      if (user.user_id != -1) {
+        const { error } = await supabase
+          .from("User Carts")
+          .update({ cart_items: { items: [] } })
+          .eq("user_id", user.user_id)
+          .select();
+        if (error) console.log(error);
+      }
     }
     if (cart.items.length > 0) {
       const itemCards = cart.items.map((cartItem) => {

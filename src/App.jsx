@@ -15,10 +15,10 @@ function App() {
   const [user, setUser] = useState(null);
   const [filter, setFilter] = useState("ALL");
 
-  if (!user) {
+  useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "null");
     if (storedUser) setUser(storedUser);
-  }
+  }, []);
 
   const location = useLocation();
   useEffect(() => {
@@ -49,11 +49,12 @@ function App() {
       if (error) console.log(error);
     }
     getProducts();
-    if (user) getInitialCart(user.user_id);
+    if (user && user.user_id != -1) getInitialCart(user.user_id);
   }, [user]);
 
   useEffect(() => {
-    if (user) localStorage.setItem("user", JSON.stringify(user));
+    if (user && user.user_id != -1)
+      localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   return (

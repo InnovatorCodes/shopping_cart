@@ -117,9 +117,17 @@ export default function Header({ active, user, setUser }) {
           <div className="user">
             <img src={userSVG} alt="User Profile" />
             <div className="profile-dropdown">
-              <h2>Welcome, </h2>
-              <h3>{user.full_name}</h3>
-              {logoutBtn}
+              {user.user_id != -1 ? (
+                <>
+                  <h2>Welcome, </h2>
+                  <h3>{user.full_name}</h3>
+                </>
+              ) : (
+                <>
+                  <h3>You're currently signed in as a guest.</h3>
+                </>
+              )}
+              {user.user_id != -1 ? logoutBtn : loginBtn}
             </div>
           </div>
         ) : (

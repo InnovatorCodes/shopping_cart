@@ -27,13 +27,15 @@ export default function Card({
         newCart.items.push({ id: prodID, quantity: qty });
       }
       setCart(newCart);
-      const { error } = await supabase
-        .from("User Carts")
-        .upsert(
-          { user_id: userID, cart_items: newCart },
-          { onConflict: ["user_id"] },
-        );
-      if (error) console.log(error);
+      if (userID != -1) {
+        const { error } = await supabase
+          .from("User Carts")
+          .upsert(
+            { user_id: userID, cart_items: newCart },
+            { onConflict: ["user_id"] },
+          );
+        if (error) console.log(error);
+      }
     }
   }
 

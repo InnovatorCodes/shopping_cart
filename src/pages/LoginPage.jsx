@@ -24,7 +24,6 @@ export default function Login() {
       else if (data.password != password)
         setAlert("Incorrect Password Entered");
       else if (data.password == password) {
-        console.log("hi");
         setUser({ user_id: data.user_id, full_name: data.full_name });
         navigate("/");
       }
@@ -117,6 +116,7 @@ export default function Login() {
               setAlert("");
             }}
             placeholder=" "
+            autoComplete="on"
             required
           />
           <label htmlFor="email">Email</label>
@@ -145,6 +145,16 @@ export default function Login() {
         <div className="alert">{alert}</div>
         <button type="submit" onClick={() => setTouched(true)}>
           Log In
+        </button>
+        <button
+          type="button"
+          className="guest"
+          onClick={() => {
+            setUser({ user_id: -1, full_name: "Guest" });
+            navigate("/");
+          }}
+        >
+          Continue as Guest
         </button>
         <p>
           New to Luno?{" "}
