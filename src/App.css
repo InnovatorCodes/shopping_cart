@@ -1,6 +1,6 @@
 @font-face {
   font-family: simplifica;
-  src: url(./assets/fonts/simplifica.ttf);
+  src: url(/fonts/simplifica.ttf);
 }
 * {
   margin: 0;
@@ -200,6 +200,9 @@ button.cart:hover {
 }
 .buttons img {
   width: 2.5rem;
+}
+.cart>img{
+  width: 2.2rem;
 }
 .slider-window {
   border: 1px solid black;
